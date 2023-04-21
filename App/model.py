@@ -44,13 +44,19 @@ dos listas, una para los videos, otra para las categorias de los mismos.
 # Construccion de modelos
 
 
-def new_data_structs():
+def new_data_structs(tip_list):
     """
     Inicializa las estructuras de datos del modelo. Las crea de
     manera vacía para posteriormente almacenar la información.
     """
+    data_struc = {
+        "data" :None
+    }
     #TODO: Inicializar las estructuras de datos
-    pass
+
+    data_struc["data"] = lt.newList(datastructure= f"{tip_list}",
+                                    cmpfunction=compare )
+    return data_struc
 
 
 # Funciones para agregar informacion al modelo
@@ -60,7 +66,7 @@ def add_data(data_structs, data):
     Función para agregar nuevos elementos a la lista
     """
     #TODO: Crear la función para agregar elementos a una lista
-    pass
+    lt.addLast(data_structs["data"],data)
 
 
 # Funciones para creacion de datos
@@ -161,8 +167,12 @@ def compare(data_1, data_2):
     """
     Función encargada de comparar dos datos
     """
-    #TODO: Crear función comparadora de la lista
-    pass
+    if data_1["id"] > data_2["id"]:
+        return 1
+    elif data_1["id"] < data_2["id"]:
+        return -1
+    else:
+        return 0
 
 # Funciones de ordenamiento
 

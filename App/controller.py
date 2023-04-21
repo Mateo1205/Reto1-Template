@@ -31,12 +31,17 @@ El controlador se encarga de mediar entre la vista y el modelo.
 """
 
 
-def new_controller():
+def new_controller(tip_list):
     """
     Crea una instancia del modelo
     """
+    control ={
+             "model":None
+    }
+    control["model"] = model.new_data_structs(tip_list)
+
     #TODO: Llamar la función del modelo que crea las estructuras de datos
-    pass
+    return control 
 
 
 # Funciones para la carga de datos
@@ -45,9 +50,13 @@ def load_data(control, filename):
     """
     Carga los datos del reto
     """
-    # TODO: Realizar la carga de datos
-    pass
-
+    catalog = control["model"]
+    dianfile = cf.data_dir + filename
+    input_file = csv.DictReader(open(dianfile, encoding = "utf-8"))
+    for contect in input_file:
+        model.add_data(catalog,contect)
+    
+    
 
 # Funciones de ordenamiento
 

@@ -27,7 +27,7 @@ from DISClib.ADT import list as lt
 from DISClib.ADT import stack as st
 from DISClib.ADT import queue as qu
 assert cf
-from tabulate import tabulate
+#from tabulate import tabulate
 import traceback
 
 """
@@ -38,12 +38,13 @@ operación solicitada
 """
 
 
-def new_controller():
+def new_controller(tipo_list):
     """
         Se crea una instancia del controlador
     """
     #TODO: Llamar la función del controlador donde se crean las estructuras de datos
-    pass
+    control = controller.new_controller(tipo_list)
+    return control
 
 
 def print_menu():
@@ -60,12 +61,80 @@ def print_menu():
     print("0- Salir")
 
 
-def load_data(control):
+
+def print_carga():
+    print("-------------------------------------------Porcentaje de carga------------------------------------")
+    print(" 1. 1%")
+    print(" 2. 5%")
+    print(" 3. 10%")
+    print(" 4. 20%")
+    print(" 5. 30%")
+    print(" 6. 50%")
+    print(" 7. 80%")
+    print(" 8. 100%")
+    opc_1 = int(input("Seleccione el porcentaje de carga que desa realizar: \n"))
+    porcentaje = None
+    if opc_1 == 1:
+        porcentaje = "small"
+    elif opc_1 == 2:
+        porcentaje = "5pct"
+    elif opc_1 == 3:
+        porcentaje = "10pct"
+    elif opc_1 == 4:
+        porcentaje = "20pct"
+    elif opc_1 == 5:
+        porcentaje = "30pct"
+    elif opc_1 == 6:
+        porcentaje = "50pct"
+    elif opc_1 == 7:
+        porcentaje = "80pct"
+    elif opc_1 == 8:
+        porcentaje = "large"
+
+    print("-----------------------------------Metodo de carga---------------------------------------------")
+    print("1. ARRAY_LIST")
+    print("2. SINGLE_LIST")
+    opc_2 = int(input("Seleccione el metodo de carga: "))
+    tip_carga = None
+    if opc_2 == 1:
+        tip_carga = "ARRAY_LIST"
+    elif opc_2 == 2:
+        tip_carga = "SINGLE_LINKED "
+
+    print("-----------------------------------Metodo de ordenamiento--------------------------------------")
+    print("1. Selection Sort")
+    print("2. Insert Sort")
+    print("3. Shell Sort")
+    print("4. Merge Sort")
+    print("5. Quick Sort")
+    opc_3 = int(input("Seleccione el metodo de ordenamiento que desea usar: "))
+    print(opc_3)
+    orden = None
+    if opc_3 == 1:
+        orden = "selection"
+    elif opc_3 == 2:
+        orden = "insert"
+    elif opc_3 == 3:
+        orden = "shell"
+    elif opc_3 == 4:
+        orden = "merge"
+    elif opc_3 == 5:
+        orden = "quick"
+    return porcentaje, tip_carga, orden
+
+
+
+    
+
+def load_data(control, orden):
     """
     Carga los datos
     """
     #TODO: Realizar la carga de datos
-    pass
+
+    data = controller.load_data(control,orden)
+    
+    return data
 
 
 def print_data(control, id):
@@ -132,15 +201,13 @@ def print_req_7(control):
 
 
 def print_req_8(control):
-    """
-        Función que imprime la solución del Requerimiento 8 en consola
-    """
+    
     # TODO: Imprimir el resultado del requerimiento 8
     pass
 
 
 # Se crea el controlador asociado a la vista
-control = new_controller()
+
 
 # main del reto
 if __name__ == "__main__":
@@ -155,7 +222,12 @@ if __name__ == "__main__":
         try:
             if int(inputs) == 1:
                 print("Cargando información de los archivos ....\n")
-                data = load_data(control)
+                porcentaje, tipo_list, orden = print_carga()
+                
+                control = new_controller(tipo_list)
+                data = load_data(control,"DIAN/Salida_agregados_renta_juridicos_AG-" + porcentaje + ".csv")
+                
+
             elif int(inputs) == 2:
                 print_req_1(control)
 
