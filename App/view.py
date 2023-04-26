@@ -227,8 +227,10 @@ if __name__ == "__main__":
                 control = new_controller(tipo_list)
                 
                 data = load_data(control,"DIAN/Salida_agregados_renta_juridicos_AG-" + porcentaje + ".csv",orden)
-                print(control)
-
+                
+                
+                primeros_ultimos_3 = controller.ejecutar_primeros_ultimos_3(control)
+                print(primeros_ultimos_3)
             elif int(inputs) == 2:
                 print_req_1(control)
 

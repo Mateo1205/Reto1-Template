@@ -29,7 +29,9 @@ import csv
 """
 El controlador se encarga de mediar entre la vista y el modelo.
 """
-
+def ejecutar_primeros_ultimos_3(control):
+    respuesta = model.ejecutar_p_u_3(control)
+    return respuesta
 
 def new_controller(tip_list):
     """

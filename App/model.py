@@ -42,6 +42,28 @@ dos listas, una para los videos, otra para las categorias de los mismos.
 """
 
 # Construccion de modelos
+def ejecutar_p_u_3(control):
+    data=control["model"]
+    anio = "2021"
+    
+    filtro= lt.newList("ARRAY_LIST")
+    lis_x_años = lt.newList("ARRAY_LIST")
+    
+    for i in lt.iterator(data["data"]):
+        print(anio)
+        if anio == i["Año"] :
+            lt.addLast(lis_x_años,i)
+
+        else: 
+            anio =i["Año"]
+            lt.addLast(filtro,lis_x_años)
+            
+            lis_x_años = lt.newList()
+            lt.addLast(lis_x_años,i)
+    
+    lt.addLast(filtro, lis_x_años)
+    return filtro
+        
 
 
 def new_data_structs(tip_list):
