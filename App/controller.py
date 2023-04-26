@@ -46,7 +46,7 @@ def new_controller(tip_list):
 
 # Funciones para la carga de datos
 
-def load_data(control, filename):
+def load_data(control, filename, orden):
     """
     Carga los datos del reto
     """
@@ -55,18 +55,18 @@ def load_data(control, filename):
     input_file = csv.DictReader(open(dianfile, encoding = "utf-8"))
     for contect in input_file:
         model.add_data(catalog,contect)
-    
+    sort(catalog,orden)
     
 
 # Funciones de ordenamiento
 
-def sort(control):
+def sort(catalog, orden):
     """
     Ordena los datos del modelo
     """
     #TODO: Llamar la función del modelo para ordenar los datos
-    pass
-
+    model.sort(catalog, orden)
+    
 
 # Funciones de consulta sobre el catálogo
 

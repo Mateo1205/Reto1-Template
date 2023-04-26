@@ -191,9 +191,27 @@ def sort_criteria(data_1, data_2):
     pass
 
 
-def sort(data_structs):
+def sort(data_structs,orden):
     """
     Función encargada de ordenar la lista con los datos
     """
     #TODO: Crear función de ordenamiento
-    pass
+    if orden == "sele":
+        se.sort(data_structs["data"],cmp_impuesto_by_año)
+    elif orden == "inser":
+        ins.sort(data_structs["data"],cmp_impuesto_by_año)
+    elif orden == "shel":
+        sa.sort(data_structs["data"],cmp_impuesto_by_año)
+    elif orden == "merg":
+        merg.sort(data_structs["data"],cmp_impuesto_by_año)
+    elif orden == "quick":
+        quk.sort(data_structs["data"],cmp_impuesto_by_año)
+
+def cmp_impuesto_by_año(unidad_1, unidad_2):
+
+    if unidad_1["Año"] == unidad_2["Año"]:
+        sub_1 = unidad_1["Código actividad económica"]
+        sub_2 = unidad_2["Código actividad económica"]
+        return float(sub_1) > float(sub_2)
+    else:
+        return int(unidad_1["Año"]) > float(unidad_2["Año"])

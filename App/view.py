@@ -64,7 +64,7 @@ def print_menu():
 
 def print_carga():
     print("-------------------------------------------Porcentaje de carga------------------------------------")
-    print(" 1. 1%")
+    print(" 1. small%")
     print(" 2. 5%")
     print(" 3. 10%")
     print(" 4. 20%")
@@ -111,13 +111,13 @@ def print_carga():
     print(opc_3)
     orden = None
     if opc_3 == 1:
-        orden = "selection"
+        orden = "sele"
     elif opc_3 == 2:
-        orden = "insert"
+        orden = "inser"
     elif opc_3 == 3:
-        orden = "shell"
+        orden = "shel"
     elif opc_3 == 4:
-        orden = "merge"
+        orden = "merg"
     elif opc_3 == 5:
         orden = "quick"
     return porcentaje, tip_carga, orden
@@ -126,13 +126,13 @@ def print_carga():
 
     
 
-def load_data(control, orden):
+def load_data(control, filename, orden):
     """
     Carga los datos
     """
     #TODO: Realizar la carga de datos
-
-    data = controller.load_data(control,orden)
+    
+    data = controller.load_data(control,filename,orden)
     
     return data
 
@@ -225,8 +225,9 @@ if __name__ == "__main__":
                 porcentaje, tipo_list, orden = print_carga()
                 
                 control = new_controller(tipo_list)
-                data = load_data(control,"DIAN/Salida_agregados_renta_juridicos_AG-" + porcentaje + ".csv")
                 
+                data = load_data(control,"DIAN/Salida_agregados_renta_juridicos_AG-" + porcentaje + ".csv",orden)
+                print(control)
 
             elif int(inputs) == 2:
                 print_req_1(control)
