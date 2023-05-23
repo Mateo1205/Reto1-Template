@@ -37,9 +37,11 @@ def new_controller(tip_list):
     """
     Crea una instancia del modelo
     """
+    #Crea el diccionario con la llave model
     control ={
              "model":None
     }
+
     control["model"] = model.new_data_structs(tip_list)
 
     #TODO: Llamar la función del modelo que crea las estructuras de datos
@@ -57,6 +59,7 @@ def load_data(control, filename, orden):
     input_file = csv.DictReader(open(dianfile, encoding = "utf-8"))
     for contect in input_file:
         model.add_data(catalog,contect)
+    # ordenamiento
     sort(catalog,orden)
     
 

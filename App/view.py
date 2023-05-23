@@ -63,6 +63,8 @@ def print_menu():
 
 
 def print_carga():
+
+    #Solicita al usuario la cantidad de datos a usar
     print("-------------------------------------------Porcentaje de carga------------------------------------")
     print(" 1. small%")
     print(" 2. 5%")
@@ -91,6 +93,8 @@ def print_carga():
     elif opc_1 == 8:
         porcentaje = "large"
 
+
+    #Solicita al usuario el tipo de lista (ARRAY_LIST, SINGLE_LIST)
     print("-----------------------------------Metodo de carga---------------------------------------------")
     print("1. ARRAY_LIST")
     print("2. SINGLE_LIST")
@@ -101,6 +105,8 @@ def print_carga():
     elif opc_2 == 2:
         tip_carga = "SINGLE_LINKED "
 
+
+    #Solicita el tipo de ordenamiento
     print("-----------------------------------Metodo de ordenamiento--------------------------------------")
     print("1. Selection Sort")
     print("2. Insert Sort")
@@ -120,6 +126,7 @@ def print_carga():
         orden = "merg"
     elif opc_3 == 5:
         orden = "quick"
+
     return porcentaje, tip_carga, orden
 
 
@@ -137,12 +144,39 @@ def load_data(control, filename, orden):
     return data
 
 
-def print_data(control, id):
+def print_data(primeros_ultimos_3):
     """
         Función que imprime un dato dado su ID
     """
+    lista=[]
+    lista_1 = []
+    print(primeros_ultimos_3)
+    for i in lt.iterator(primeros_ultimos_3):
+        if lt.size(i) <= 6:
+            for h in range(lt.size(i)):
+                lista_1.append(lt.getElement(i,h))
+            lista.append(lista_1)
+            lista_1=[]
+        else:
+            
+            for j in range(0,3):
+                
+                lista_1.append(lt.firstElement(i))
+                lt.removeFirst(i)
+                lista_1.append(lt.lastElement(i))
+                lt.removeLast(i)
+                
+            
+            lista.append(lista_1)
+            lista_1=[]
+            
     #TODO: Realizar la función para imprimir un elemento
-    pass
+    
+    for i in lista:
+       for j in i:
+            print("---------------------------------------------------------------------")
+            print(str(j["Año"])+ "     ||     " +str(j["Código actividad económica"]))
+            print("---------------------------------------------------------------------")
 
 def print_req_1(control):
     """
@@ -217,20 +251,32 @@ if __name__ == "__main__":
     working = True
     #ciclo del menu
     while working:
+
+        
         print_menu()
         inputs = input('Seleccione una opción para continuar\n')
         try:
             if int(inputs) == 1:
+
+                #Solicita al usuario toda la informacion para realizar la carga de datos
                 print("Cargando información de los archivos ....\n")
+
+                #Porcetaje de datos, tipo de lista y tipo de ordenamiento
                 porcentaje, tipo_list, orden = print_carga()
-                
+
+                # conecta la funcion new_controller y envia el tipo de lista. Inicializa la estructuta de datos
                 control = new_controller(tipo_list)
                 
+                #Realizar la carga de datos (inicio de la estructura de datos, nombre dela rchivo a cargar, tipo de orden)
                 data = load_data(control,"DIAN/Salida_agregados_renta_juridicos_AG-" + porcentaje + ".csv",orden)
                 
                 
                 primeros_ultimos_3 = controller.ejecutar_primeros_ultimos_3(control)
-                print(primeros_ultimos_3)
+                
+                print_data(primeros_ultimos_3)
+                
+
+
             elif int(inputs) == 2:
                 print_req_1(control)
 

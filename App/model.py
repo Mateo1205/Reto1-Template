@@ -50,15 +50,15 @@ def ejecutar_p_u_3(control):
     lis_x_años = lt.newList("ARRAY_LIST")
     
     for i in lt.iterator(data["data"]):
-        print(anio)
+       
         if anio == i["Año"] :
             lt.addLast(lis_x_años,i)
 
         else: 
             anio =i["Año"]
             lt.addLast(filtro,lis_x_años)
-            
-            lis_x_años = lt.newList()
+
+            lis_x_años = lt.newList("ARRAY_LIST")
             lt.addLast(lis_x_años,i)
     
     lt.addLast(filtro, lis_x_años)
@@ -230,7 +230,8 @@ def sort(data_structs,orden):
         quk.sort(data_structs["data"],cmp_impuesto_by_año)
 
 def cmp_impuesto_by_año(unidad_1, unidad_2):
-
+    
+    #criterio de ordenamiento por año
     if unidad_1["Año"] == unidad_2["Año"]:
         sub_1 = unidad_1["Código actividad económica"]
         sub_2 = unidad_2["Código actividad económica"]
