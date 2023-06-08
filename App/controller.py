@@ -29,9 +29,7 @@ import csv
 """
 El controlador se encarga de mediar entre la vista y el modelo.
 """
-def ejecutar_primeros_ultimos_3(control):
-    respuesta = model.ejecutar_p_u_3(control)
-    return respuesta
+
 
 def new_controller(tip_list):
     """
@@ -83,36 +81,54 @@ def get_data(control, id):
     pass
 
 
-def req_1(control):
+def req_1(req_1):
     """
     Retorna el resultado del requerimiento 1
     """
     # TODO: Modificar el requerimiento 1
-    pass
+    res_1 = model.req_1(req_1)
+    
+    return res_1
 
 
-def req_2(control):
+
+
+def req_2(req_2):
     """
     Retorna el resultado del requerimiento 2
     """
     # TODO: Modificar el requerimiento 2
-    pass
+    res_2 = model.req_2(req_2)
+    return res_2
 
 
-def req_3(control):
+
+
+def req_3(req_3):
     """
     Retorna el resultado del requerimiento 3
     """
     # TODO: Modificar el requerimiento 3
-    pass
+    impresion_1, impresion_2 = model.req_3(req_3)
+
+    return impresion_1, impresion_2
 
 
-def req_4(control):
+
+
+
+
+
+def req_4(req_4):
     """
     Retorna el resultado del requerimiento 4
     """
     # TODO: Modificar el requerimiento 4
-    pass
+    impresion_1 = model.req_4(req_4)
+
+    return impresion_1
+
+
 
 
 def req_5(control):
@@ -122,12 +138,19 @@ def req_5(control):
     # TODO: Modificar el requerimiento 5
     pass
 
+
+
+
+
 def req_6(control):
     """
     Retorna el resultado del requerimiento 6
     """
     # TODO: Modificar el requerimiento 6
     pass
+
+
+
 
 
 def req_7(control):
@@ -138,12 +161,17 @@ def req_7(control):
     pass
 
 
+
+
+
 def req_8(control):
     """
     Retorna el resultado del requerimiento 8
     """
     # TODO: Modificar el requerimiento 8
     pass
+
+
 
 
 # Funciones para medir tiempos de ejecucion

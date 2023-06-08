@@ -42,22 +42,21 @@ dos listas, una para los videos, otra para las categorias de los mismos.
 """
 
 # Construccion de modelos
-def ejecutar_p_u_3(control):
-    data=control["model"]
+def ejecutar_p_u_3(data_1):
+
+    
     anio = "2021"
     
     filtro= lt.newList("ARRAY_LIST")
     lis_x_años = lt.newList("ARRAY_LIST")
     
-    for i in lt.iterator(data["data"]):
-       
+    for i in lt.iterator(data_1["model"]["data"]):
+
         if anio == i["Año"] :
             lt.addLast(lis_x_años,i)
-
         else: 
             anio =i["Año"]
             lt.addLast(filtro,lis_x_años)
-
             lis_x_años = lt.newList("ARRAY_LIST")
             lt.addLast(lis_x_años,i)
     
@@ -81,7 +80,6 @@ def new_data_structs(tip_list):
     return data_struc
 
 
-# Funciones para agregar informacion al modelo
 
 def add_data(data_structs, data):
     """
@@ -91,7 +89,6 @@ def add_data(data_structs, data):
     lt.addLast(data_structs["data"],data)
 
 
-# Funciones para creacion de datos
 
 def new_data(id, info):
     """
@@ -101,7 +98,6 @@ def new_data(id, info):
     pass
 
 
-# Funciones de consulta
 
 def get_data(data_structs, id):
     """
@@ -109,6 +105,7 @@ def get_data(data_structs, id):
     """
     #TODO: Crear la función para obtener un dato de una lista
     pass
+
 
 
 def data_size(data_structs):
@@ -119,28 +116,295 @@ def data_size(data_structs):
     pass
 
 
-def req_1(data_structs):
+
+def  req_1(res_1):
     """
     Función que soluciona el requerimiento 1
     """
     # TODO: Realizar el requerimiento 1
-    pass
+    req_1 = ejecutar_p_u_3(res_1)
+    
+    """"
+    lista=lt.newList("ARRAY_LIST")
+    lista_filtro = ["Año","Código actividad económica","Nombre actividad económica","Código sector económico","Nombre sector económico"
+                    ,"Código subsector económico","Nombre subsector económico","Total ingresos netos","Total costos y gastos",
+                    "Total saldo a pagar","Total saldo a favor"]
+    for j in lt.iterator(req_1):
+        mayor = 0
+        info = None
+        
+        for h in lt.iterator(j):
+            if int(h["Total saldo a pagar"]) > mayor:
+                dicc ={}
+                for keys in lista_filtro:
+                    dicc[keys] = h[keys]
+                info = dicc
+                mayor =int(h["Total saldo a pagar"])
+        
+        lt.addLast(lista,info)
+    """
+
+    req_1 = ejecutar_p_u_3(res_1)
+    
+    lista=lt.newList("ARRAY_LIST")
+    lista_filtro = ["Año","Código actividad económica","Nombre actividad económica","Código sector económico","Nombre sector económico"
+                    ,"Código subsector económico","Nombre subsector económico","Total ingresos netos","Total costos y gastos",
+                    "Total saldo a pagar","Total saldo a favor"]
+    lt.addLast(lista, lista_filtro)
+    for j in lt.iterator(req_1):
+        mayor = 0
+        info = None
+        lista_1= lt.newList("ARRAY_LIST")
+        for h in lt.iterator(j):
+            if int(h["Total saldo a pagar"]) > mayor: 
+                for keys in lista_filtro:
+                    lt.addLast(lista_1,h[keys])
+                mayor =int(h["Total saldo a pagar"])
+        
+        lt.addLast(lista,lista_1["elements"])
+
+   
+    
+    """lista_quitar =["Código subsector económico","Nombre subsector económico","Costos y gastos nómina","Aportes seguridad"
+                   ,"Aportes a entidades","Efectivo y equivalentes","Inversiones e instrumentos","Cuentas y otros por cobrar"
+                   ,"Inventarios","Propiedades","Otros activos","Total patrimonio bruto","Pasivos","Total patrimonio líquido"
+                   ,"Ingresos ordinarios","Ingresos financieros","Otros ingresos","Total ingresos brutos","Devoluciones, rebajas"
+                   ,"Ingresos no renta","Total ingresos netos","Costos","Gastos administración","Gastos distribución"
+                   ,"Gastos financieros","Otros gastos","Total costos y gastos","Renta líquida ordinaria","Pérdida líquida"
+                   ,"Compensaciones","Renta líquida","Renta presuntiva","Renta exenta","Rentas gravables","Renta líquida gravable"
+                   ,"Ingresos ganancias ocasionales","Costos ganancias ocasionales","Ganancias ocasionales no gravadas"
+                   ,"Ganancias ocasionales gravables","Impuesto RLG","Descuentos tributarios","Impuesto neto de renta"
+                   ,"Impuesto ganancias ocasionales","Total Impuesto a cargo","Anticipo renta año anterior"
+                   ,"Saldo a favor año anterior","Autorretenciones","Otras retenciones","Total retenciones"
+                   ,"Anticipo renta siguiente año","Saldo a pagar por impuesto","Sanciones","Total saldo a pagar","Total saldo a favor"]
+    
+    for i in lt.iterator(lista):
+       for j in  lista_quitar:
+           if j in i:
+               i.pop(j, None)"""
+
+    return lista
 
 
-def req_2(data_structs):
+
+
+
+def req_2(res_2):
     """
     Función que soluciona el requerimiento 2
     """
+    req_2 = ejecutar_p_u_3(res_2)
     # TODO: Realizar el requerimiento 2
-    pass
+    lista=lt.newList("ARRAY_LIST")
+
+    lista_filtro = ["Año","Código actividad económica","Nombre actividad económica","Código sector económico","Nombre sector económico"
+                    ,"Código subsector económico","Nombre subsector económico","Total ingresos netos","Total costos y gastos",
+                    "Total saldo a pagar","Total saldo a favor"]
+
+    for j in lt.iterator(req_2):
+        mayor = 0
+        info = None
+        for h in lt.iterator(j):
+            if int(h['Total saldo a favor']) > mayor:
+                dicc={}
+                for keys in lista_filtro:
+                    dicc[keys] = h[keys]
+                info=dicc
+                mayor =int(h["Total saldo a favor"])
+        
+        lt.addLast(lista,info)
+       
+    
+    return lista
 
 
-def req_3(data_structs):
+
+
+
+def req_3(req_3):
     """
     Función que soluciona el requerimiento 3
     """
     # TODO: Realizar el requerimiento 3
-    pass
+    #Organizado por año: Pocedemos a organizar cada año por sector y subsector
+
+    req_3 = ejecutar_p_u_3(req_3)
+    """
+    for j in lt.iterator(req_3):
+         se.sort(j,cmp_año_by_sector)
+
+    lista = lt.newList("ARRAY_LIST")
+    lista_1 =lt.newList("ARRAY_LIST")
+    for i in lt.iterator(req_3):
+        
+        lista_2 = lt.newList("ARRAY_LIST")
+        Codigo_sub = lt.firstElement(i)["Código subsector económico"]
+        
+        total_retenciones= 0
+        menor=None
+        menor_total=None
+
+        for h in lt.iterator(i):
+            if Codigo_sub == h["Código subsector económico"]:
+                lt.addLast(lista_2,h)
+                total_retenciones += int(h["Total retenciones"])
+                
+            elif Codigo_sub != h["Código subsector económico"]:
+                
+                if (menor == None) or (total_retenciones < menor):
+                    menor= total_retenciones
+                    menor_total = lista_2
+                    
+                total_retenciones = 0
+                Codigo_sub = h["Código subsector económico"]
+                total_retenciones += int(h["Total retenciones"])
+                
+                
+
+                lista_2 = lt.newList("ARRAY_LIST")
+
+                lt.addLast(lista_2,h)
+            
+        if (total_retenciones < menor):
+                menor_total = lista_2
+                
+            
+        lt.addLast(lista,menor_total)
+
+    """    
+    for j in lt.iterator(req_3):
+         se.sort(j,cmp_año_by_sector)
+
+    lista = lt.newList("ARRAY_LIST")
+    
+    for i in lt.iterator(req_3):
+        
+        lista_2 = lt.newList("ARRAY_LIST")
+        Codigo_sub = lt.firstElement(i)["Código subsector económico"]
+        
+        total_retenciones= 0
+        menor=None
+        menor_total=None
+
+        for h in lt.iterator(i):
+            if Codigo_sub == h["Código subsector económico"]:
+                lt.addLast(lista_2,h)
+                total_retenciones += int(h["Total retenciones"])
+                
+            elif Codigo_sub != h["Código subsector económico"]:
+                
+                if (menor == None) or (total_retenciones < menor):
+                    menor= total_retenciones
+                    menor_total = lista_2
+                    
+                total_retenciones = 0
+                Codigo_sub = h["Código subsector económico"]
+                total_retenciones += int(h["Total retenciones"])
+                
+                
+
+                lista_2 = lt.newList("ARRAY_LIST")
+
+                lt.addLast(lista_2,h)
+            
+        if (total_retenciones < menor):
+                menor_total = lista_2
+                
+            
+        lt.addLast(lista,menor_total)
+
+    impresion_1 = organizar_respuesta_3(lista)
+    impresion_2 = organizar_respuesta_3_1(lista)
+
+    return impresion_1, impresion_2
+
+
+def organizar_respuesta_3(impresion_1):
+    lista = lt.newList("ARRAY_LIST")
+    lista_filtra=["Año","Código sector económico","Nombre sector económico","Código subsector económico","Nombre subsector económico"]
+    
+    for i in lt.iterator(impresion_1):
+        l= lt.firstElement(i)
+        lista_aux = lt.newList("ARRAY_LIST")
+        total_rete=0
+        total_ingresos_n=0
+        total_cost_gas=0
+        total_sald_pagar=0
+        total_saldo_favor=0
+        for k in lt.iterator(i):
+           total_rete+= int(k["Total retenciones"])
+           total_ingresos_n += int(k["Total ingresos netos"])
+           total_cost_gas += int(k["Total costos y gastos"])
+           total_sald_pagar += int(k["Total saldo a pagar"])
+           total_saldo_favor += int(k["Total saldo a favor"])
+        
+        for key in lista_filtra:
+            lt.addLast(lista_aux,l[key])
+
+        lt.addLast(lista_aux,total_rete)
+        lt.addLast(lista_aux,total_ingresos_n)
+        lt.addLast(lista_aux,total_cost_gas)
+        lt.addLast(lista_aux,total_sald_pagar)
+        lt.addLast(lista_aux,total_saldo_favor)
+        lt.addLast(lista,lista_aux)
+
+        param2 = ["Año","Código sector económico","Nombre sector económico","Código subsector económico",
+             "Nombre subsector económico","Total retenciones del subsector económico",
+             "Total ingresos netos del subsector económico","Total costos y gastos del subsector económico",
+             "Total saldo a pagar del subsector económico","Total saldo a favor del subsector económico"]
+        
+        lt.addFirst(lista,param2)
+    
+    """"lista_quitar =["Costos y gastos nómina","Código actividad económica","Nombre actividad económica",
+                   "Aportes seguridad","Aportes a entidades","Efectivo y equivalentes","Inversiones e instrumentos"
+                   ,"Cuentas y otros por cobrar","Inventarios","Propiedades","Otros activos","Total patrimonio bruto"
+                   ,"Pasivos","Total patrimonio líquido","Ingresos ordinarios","Ingresos financieros","Otros ingresos"
+                   ,"Total ingresos brutos","Devoluciones, rebajas","Ingresos no renta","Total ingresos netos","Costos"
+                   ,"Gastos administración","Gastos distribución","Gastos financieros","Otros gastos","Total costos y gastos"
+                   ,"Renta líquida ordinaria","Pérdida líquida","Compensaciones","Renta líquida","Renta presuntiva","Renta exenta"
+                   ,"Rentas gravables","Renta líquida gravable","Ingresos ganancias ocasionales","Costos ganancias ocasionales"
+                   ,"Ganancias ocasionales no gravadas","Ganancias ocasionales gravables","Impuesto RLG","Descuentos tributarios"
+                   ,"Impuesto neto de renta","Impuesto ganancias ocasionales","Total Impuesto a cargo","Anticipo renta año anterior"
+                   ,"Saldo a favor año anterior","Autorretenciones","Otras retenciones","Total retenciones"
+                   ,"Anticipo renta siguiente año","Saldo a pagar por impuesto","Sanciones","Total saldo a pagar","Total saldo a favor"]
+    
+    for i in lt.iterator(lista):
+       for j in  lista_quitar:
+           if j in i:
+               i.pop(j, None)"""
+       
+    return lista 
+def organizar_respuesta_3_1(impresion_2):
+
+    lista = lt.newList("ARRAY_LIST")
+    lista_quitar=[ "Código actividad económica","Nombre actividad económica","Total retenciones","Total ingresos netos",
+                  "Total costos y gastos", "Total saldo a pagar", "Total saldo a favor"]
+    for i in lt.iterator(impresion_2):
+       lista_1 = lt.newList("ARRAY_LIST")
+       dicc={}
+       for k in lt.iterator(i):
+           for key in lista_quitar:
+               dicc[key] = k[key]
+           lt.addLast(lista_1,dicc)
+           dicc = {}
+           
+       if lt.size(i) <= 6:
+          lt.addLast(lista,lista_1)
+       else:
+            for y in range(3):
+               x= lt.firstElement(lista_1)
+               lt.addFirst(lista,x)
+               lt.removeFirst(lista_1)
+
+               y = lt.lastElement(lista_1)
+               lt.addLast(lista,y)
+               lt.removeLast(i)
+            
+    return lista
+
+
+
+
 
 
 def req_4(data_structs):
@@ -151,12 +415,14 @@ def req_4(data_structs):
     pass
 
 
+
 def req_5(data_structs):
     """
     Función que soluciona el requerimiento 5
     """
     # TODO: Realizar el requerimiento 5
     pass
+
 
 
 def req_6(data_structs):
@@ -167,12 +433,14 @@ def req_6(data_structs):
     pass
 
 
+
 def req_7(data_structs):
     """
     Función que soluciona el requerimiento 7
     """
     # TODO: Realizar el requerimiento 7
     pass
+
 
 
 def req_8(data_structs):
@@ -183,7 +451,6 @@ def req_8(data_structs):
     pass
 
 
-# Funciones utilizadas para comparar elementos dentro de una lista
 
 def compare(data_1, data_2):
     """
@@ -196,7 +463,6 @@ def compare(data_1, data_2):
     else:
         return 0
 
-# Funciones de ordenamiento
 
 
 def sort_criteria(data_1, data_2):
@@ -211,6 +477,7 @@ def sort_criteria(data_1, data_2):
     """
     #TODO: Crear función comparadora para ordenar
     pass
+
 
 
 def sort(data_structs,orden):
@@ -229,6 +496,8 @@ def sort(data_structs,orden):
     elif orden == "quick":
         quk.sort(data_structs["data"],cmp_impuesto_by_año)
 
+
+
 def cmp_impuesto_by_año(unidad_1, unidad_2):
     
     #criterio de ordenamiento por año
@@ -238,3 +507,22 @@ def cmp_impuesto_by_año(unidad_1, unidad_2):
         return float(sub_1) > float(sub_2)
     else:
         return int(unidad_1["Año"]) > float(unidad_2["Año"])
+
+
+
+def cmp_año_by_sector(unidad_1,unidad_2):
+    
+    if unidad_1["Código sector económico"] == unidad_2["Código sector económico"]:
+        sub_1 = unidad_1["Código subsector económico"]
+        sub_2 = unidad_2["Código subsector económico"]
+        return float(sub_1) < float(sub_2)
+    else:
+        return int(unidad_1["Código sector económico"]) < float(unidad_2["Código sector económico"])
+    
+def cmp_año_by_actividad_econonomica(unidad_1,unidad_2):
+    if unidad_1["Código sector económico"] == unidad_2["Código sector económico"]:
+        sub_1 = unidad_1["Código subsector económico"]
+        sub_2 = unidad_2["Código subsector económico"]
+        return float(sub_1) < float(sub_2)
+    else:
+        return int(unidad_1["Código sector económico"]) < float(unidad_2["Código sector económico"])

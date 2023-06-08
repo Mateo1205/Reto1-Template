@@ -27,7 +27,7 @@ from DISClib.ADT import list as lt
 from DISClib.ADT import stack as st
 from DISClib.ADT import queue as qu
 assert cf
-#from tabulate import tabulate
+from tabulate import tabulate
 import traceback
 
 """
@@ -45,6 +45,7 @@ def new_controller(tipo_list):
     #TODO: Llamar la función del controlador donde se crean las estructuras de datos
     control = controller.new_controller(tipo_list)
     return control
+
 
 
 def print_menu():
@@ -74,6 +75,7 @@ def print_carga():
     print(" 6. 50%")
     print(" 7. 80%")
     print(" 8. 100%")
+    
     opc_1 = int(input("Seleccione el porcentaje de carga que desa realizar: \n"))
     porcentaje = None
     if opc_1 == 1:
@@ -129,9 +131,7 @@ def print_carga():
 
     return porcentaje, tip_carga, orden
 
-
-
-    
+ 
 
 def load_data(control, filename, orden):
     """
@@ -144,62 +144,54 @@ def load_data(control, filename, orden):
     return data
 
 
+
 def print_data(primeros_ultimos_3):
     """
         Función que imprime un dato dado su ID
     """
-    lista=[]
-    lista_1 = []
-    print(primeros_ultimos_3)
-    for i in lt.iterator(primeros_ultimos_3):
-        if lt.size(i) <= 6:
-            for h in range(lt.size(i)):
-                lista_1.append(lt.getElement(i,h))
-            lista.append(lista_1)
-            lista_1=[]
-        else:
-            
-            for j in range(0,3):
-                
-                lista_1.append(lt.firstElement(i))
-                lt.removeFirst(i)
-                lista_1.append(lt.lastElement(i))
-                lt.removeLast(i)
-                
-            
-            lista.append(lista_1)
-            lista_1=[]
+    
             
     #TODO: Realizar la función para imprimir un elemento
-    
-    for i in lista:
-       for j in i:
-            print("---------------------------------------------------------------------")
-            print(str(j["Año"])+ "     ||     " +str(j["Código actividad económica"]))
-            print("---------------------------------------------------------------------")
 
-def print_req_1(control):
+
+
+def print_req_1(req_1):
     """
         Función que imprime la solución del Requerimiento 1 en consola
     """
     # TODO: Imprimir el resultado del requerimiento 1
-    pass
+    
+    res_1 = controller.req_1(req_1)
+
+    print(tabulate(res_1["elements"], headers="keys", tablefmt="fancy_grid",maxcolwidths=10 , maxheadercolwidths=10))
 
 
-def print_req_2(control):
+
+def print_req_2(req_2):
     """
         Función que imprime la solución del Requerimiento 2 en consola
     """
     # TODO: Imprimir el resultado del requerimiento 2
-    pass
+
+    res_2= controller. req_2(req_2)
+   
+    print(tabulate(res_2["elements"], headers="keys", tablefmt="fancy_grid",maxcolwidths=10, maxheadercolwidths=10))
 
 
-def print_req_3(control):
+
+def print_req_3(req_3):
     """
         Función que imprime la solución del Requerimiento 3 en consola
     """
     # TODO: Imprimir el resultado del requerimiento 3
-    pass
+    impresion_1, impresion_2 = controller. req_3(req_3)
+    
+    
+    print(tabulate(impresion_1["elements"], headers= "keys",tablefmt="fancy_grid",maxcolwidths=10, maxheadercolwidths=10))
+    
+    for i in lt.iterator(impresion_2):
+          print(tabulate(i["elements"], headers= "keys",tablefmt="fancy_grid",maxcolwidths=10, maxheadercolwidths=10))
+
 
 
 def print_req_4(control):
@@ -207,8 +199,9 @@ def print_req_4(control):
         Función que imprime la solución del Requerimiento 4 en consola
     """
     # TODO: Imprimir el resultado del requerimiento 4
-    pass
+    impresion_1 = controller.req_4(control)
 
+    
 
 def print_req_5(control):
     """
@@ -216,6 +209,7 @@ def print_req_5(control):
     """
     # TODO: Imprimir el resultado del requerimiento 5
     pass
+
 
 
 def print_req_6(control):
@@ -226,6 +220,7 @@ def print_req_6(control):
     pass
 
 
+
 def print_req_7(control):
     """
         Función que imprime la solución del Requerimiento 7 en consola
@@ -234,16 +229,14 @@ def print_req_7(control):
     pass
 
 
+
 def print_req_8(control):
     
     # TODO: Imprimir el resultado del requerimiento 8
     pass
 
+control= None
 
-# Se crea el controlador asociado a la vista
-
-
-# main del reto
 if __name__ == "__main__":
     """
     Menu principal
@@ -265,25 +258,34 @@ if __name__ == "__main__":
                 porcentaje, tipo_list, orden = print_carga()
 
                 # conecta la funcion new_controller y envia el tipo de lista. Inicializa la estructuta de datos
-                control = new_controller(tipo_list)
                 
+                control = new_controller(tipo_list)
                 #Realizar la carga de datos (inicio de la estructura de datos, nombre dela rchivo a cargar, tipo de orden)
                 data = load_data(control,"DIAN/Salida_agregados_renta_juridicos_AG-" + porcentaje + ".csv",orden)
                 
                 
-                primeros_ultimos_3 = controller.ejecutar_primeros_ultimos_3(control)
                 
-                print_data(primeros_ultimos_3)
                 
+                
+                
+                print_data(control)
+               
 
 
             elif int(inputs) == 2:
+                
+                
+                
+                
                 print_req_1(control)
-
+                
             elif int(inputs) == 3:
+                
+                
+                
                 print_req_2(control)
 
-            elif int(inputs) == 4:
+            elif int(inputs) == 4:            
                 print_req_3(control)
 
             elif int(inputs) == 5:
