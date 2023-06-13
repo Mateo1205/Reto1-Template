@@ -154,7 +154,6 @@ def print_data(primeros_ultimos_3):
     #TODO: Realizar la función para imprimir un elemento
 
 
-
 def print_req_1(req_1):
     """
         Función que imprime la solución del Requerimiento 1 en consola
