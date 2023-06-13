@@ -37,11 +37,12 @@ def new_controller(tip_list):
     """
     #Crea el diccionario con la llave model
     control ={
-             "model":None
+             "model" : None
+             
     }
 
     control["model"] = model.new_data_structs(tip_list)
-
+  
     #TODO: Llamar la función del modelo que crea las estructuras de datos
     return control 
 
@@ -59,7 +60,13 @@ def load_data(control, filename, orden):
         model.add_data(catalog,contect)
     # ordenamiento
     sort(catalog,orden)
+
+    control["model"]["Años1"] = model.ejecutar_p_u_3(control["model"])
     
+
+
+
+
 
 # Funciones de ordenamiento
 
@@ -86,7 +93,7 @@ def req_1(req_1):
     Retorna el resultado del requerimiento 1
     """
     # TODO: Modificar el requerimiento 1
-    res_1 = model.req_1(req_1)
+    res_1 = model.req_1(req_1["Años1"])
     
     return res_1
 
@@ -98,7 +105,8 @@ def req_2(req_2):
     Retorna el resultado del requerimiento 2
     """
     # TODO: Modificar el requerimiento 2
-    res_2 = model.req_2(req_2)
+    
+    res_2 = model.req_2(req_2["Años1"])
     return res_2
 
 
@@ -109,7 +117,8 @@ def req_3(req_3):
     Retorna el resultado del requerimiento 3
     """
     # TODO: Modificar el requerimiento 3
-    impresion_1, impresion_2 = model.req_3(req_3)
+   
+    impresion_1, impresion_2 = model.req_3(req_3["Años1"])
 
     return impresion_1, impresion_2
 
@@ -124,10 +133,7 @@ def req_4(req_4):
     Retorna el resultado del requerimiento 4
     """
     # TODO: Modificar el requerimiento 4
-    impresion_1 = model.req_4(req_4)
-
-    return impresion_1
-
+    
 
 
 
@@ -142,12 +148,15 @@ def req_5(control):
 
 
 
-def req_6(control):
+def req_6(control, anio):
     """
     Retorna el resultado del requerimiento 6
     """
     # TODO: Modificar el requerimiento 6
-    pass
+    
+    impresion_1 = model.req_6(control["Años1"],anio)
+
+    return impresion_1
 
 
 

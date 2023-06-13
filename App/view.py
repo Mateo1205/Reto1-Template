@@ -105,7 +105,7 @@ def print_carga():
     if opc_2 == 1:
         tip_carga = "ARRAY_LIST"
     elif opc_2 == 2:
-        tip_carga = "SINGLE_LINKED "
+        tip_carga = "SINGLE_LINKED"
 
 
     #Solicita el tipo de ordenamiento
@@ -161,7 +161,7 @@ def print_req_1(req_1):
     """
     # TODO: Imprimir el resultado del requerimiento 1
     
-    res_1 = controller.req_1(req_1)
+    res_1 = controller.req_1(req_1["model"])
 
     print(tabulate(res_1["elements"], headers="keys", tablefmt="fancy_grid",maxcolwidths=10 , maxheadercolwidths=10))
 
@@ -173,7 +173,7 @@ def print_req_2(req_2):
     """
     # TODO: Imprimir el resultado del requerimiento 2
 
-    res_2= controller. req_2(req_2)
+    res_2= controller. req_2(req_2["model"])
    
     print(tabulate(res_2["elements"], headers="keys", tablefmt="fancy_grid",maxcolwidths=10, maxheadercolwidths=10))
 
@@ -184,15 +184,18 @@ def print_req_3(req_3):
         Función que imprime la solución del Requerimiento 3 en consola
     """
     # TODO: Imprimir el resultado del requerimiento 3
-    impresion_1, impresion_2 = controller. req_3(req_3)
+    impresion_1, impresion_2 = controller. req_3(req_3["model"])
     
     
     print(tabulate(impresion_1["elements"], headers= "keys",tablefmt="fancy_grid",maxcolwidths=10, maxheadercolwidths=10))
-    
+    año =2012
     for i in lt.iterator(impresion_2):
+          size = str(lt.size(i))
+          print("There are only ", size , " economic activities in", año)
+          año+=1
           print(tabulate(i["elements"], headers= "keys",tablefmt="fancy_grid",maxcolwidths=10, maxheadercolwidths=10))
-
-
+        
+          
 
 def print_req_4(control):
     """
@@ -217,7 +220,10 @@ def print_req_6(control):
         Función que imprime la solución del Requerimiento 6 en consola
     """
     # TODO: Imprimir el resultado del requerimiento 6
-    pass
+    anio = int(input("Ingrese el año de interes"))
+    impresion =controller.req_6(control["model"],anio)
+    
+    print(tabulate(impresion["elements"], headers= "keys",tablefmt="fancy_grid",maxcolwidths=10, maxheadercolwidths=10))
 
 
 
@@ -264,7 +270,7 @@ if __name__ == "__main__":
                 data = load_data(control,"DIAN/Salida_agregados_renta_juridicos_AG-" + porcentaje + ".csv",orden)
                 
                 
-                
+                print(control)
                 
                 
                 
