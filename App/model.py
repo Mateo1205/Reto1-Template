@@ -62,8 +62,60 @@ def ejecutar_p_u_3(data_1):
             lt.addLast(lis_x_años,i)
               
     lt.addLast(filtro, lis_x_años)
-    return filtro
+    
+    lista_organizada_completa =agrupar_sec_sub_act(filtro)
+    return lista_organizada_completa
+def agrupar_sec_sub_act(lista):
+    lista_final = lt.newList("ARRAY_LIST")
+    lista_organizada = lt.newList("ARRAY_LIST")
+    lista_sec = lt.newList("ARRAY_LIST")
+    lista_sub = lt.newList("ARRAY_LIST")
+    lista_act = lt.newList("ARRAY_LIST")
+
+    
+
+    for cada in lt.iterator(lista):
+        primero = lt.firstElement(cada)
+        for elem in lt.iterator(cada):
+            if elem["Código sector económico"] == primero["Código sector económico"]:
+                if elem["Código subsector económico"] == primero["Código subsector económico"]:
+                    if elem["Código actividad económica"] == primero["Código actividad económica"]:
+                        lt.addLast(lista_act,elem)
+
+                    else:
+                        lt.addLast(lista_sub,lista_act)
+                        lista_act=lt.newList("ARRAY_LIST")
+                        lt.addLast(lista_act,elem)
+                        primero = elem
+
+                else:
+                    lt.addLast(lista_sub,lista_act)
+                    lt.addLast(lista_sec,lista_sub)
+                    lista_sub=lt.newList("ARRAY_LIST")
+                    lista_act=lt.newList("ARRAY_LIST")
+                    lt.addLast(lista_act,elem)
+                    primero = elem
+
+            else:
+                lt.addLast(lista_sub, lista_act)
+                lt.addLast(lista_sec, lista_sub)
+                lt.addLast(lista_organizada,lista_sec)
+                lista_sec=lt.newList("ARRAY_LIST")
+                lista_act =lt.newList("ARRAY_LIST")
+                lista_sub =lt.newList("ARRAY_LIST")
+                lt.addLast(lista_act,elem)
+                primero= elem
+
+        lt.addLast(lista_sub,lista_act)
+        lt.addLast(lista_sec, lista_sub)
+        lt.addLast(lista_organizada,lista_sec)
+        lt.addLast(lista_final,lista_organizada)
+        lista_sec=lt.newList("ARRAY_LIST")
+        lista_act =lt.newList("ARRAY_LIST")
+        lista_sub =lt.newList("ARRAY_LIST")
+        lista_organizada =lt.newList("ARRAY_LIST")
         
+    return lista_final
 
 
 def new_data_structs(tip_list):
@@ -370,34 +422,34 @@ def agrupar_6(lista):
     lista_sec = lt.newList("ARRAY_LIST")
     lista_sub = lt.newList("ARRAY_LIST")
     lista_act = lt.newList("ARRAY_LIST")
+
     primero = lt.firstElement(lista)
     for elem in lt.iterator(lista):
         if elem["Código sector económico"] == primero["Código sector económico"]:
             if elem["Código subsector económico"] == primero["Código subsector económico"]:
-                lt.addLast(lista_sub,elem)
+                if elem["Código actividad económica"] == primero["Código actividad económica"]:
+                    lt.addLast(lista_act,elem)
 
-                if elem["Código"]
-
-
-
-
+                else:
+                    lt.addLast(lista_sub,lista_act)
+                    lista_act=lt.newList("ARRAY_LIST")
+                    lt.addLast(lista_act,elem)
+                    primero = elem
 
             else:
                 lt.addLast(lista_sec,lista_sub)
                 lista_sub=lt.newList("ARRAY_LIST")
-                lt.addLast(lista_sub,elem)
+                lt.addLast(lista_act,elem)
                 primero = elem
 
         else:
-            lt.addLast(lista_sec,lista_sub)
-            lista_sub=lt.newList("ARRAY_LIST")
-            lt.addLast(lista_sub,elem)
-
             lt.addLast(lista_organizada,lista_sec)
             lista_sec=lt.newList("ARRAY_LIST")
+            lt.addLast(lista_act,elem)
             primero= elem
 
-    lt.addLast(lista_sec,lista_sub)
+    lt.addLast(lista_sub,lista_act)
+    lt.addLast(lista_sec, lista_sub)
     lt.addLast(lista_organizada,lista_sec)
 
 
@@ -582,7 +634,7 @@ def cmp_año_by_sector(unidad_1,unidad_2):
         if unidad_1["Código subsector económico"] == unidad_2["Código subsector económico"]:
             sub_1 = unidad_1["Código actividad económica"]
             sub_2 = unidad_2["Código actividad económica"]
-            return float(sub_1) < float(sub_2)
+            return sub_1 == sub_2
         else:
             unidad_1["Código subsector económico"] < unidad_2["Código subsector económico"]
     else:

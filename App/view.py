@@ -27,7 +27,7 @@ from DISClib.ADT import list as lt
 from DISClib.ADT import stack as st
 from DISClib.ADT import queue as qu
 assert cf
-from tabulate import tabulate
+#from tabulate import tabulate
 import traceback
 
 """
@@ -161,7 +161,7 @@ def print_req_1(req_1):
     """
     # TODO: Imprimir el resultado del requerimiento 1
     
-    res_1 = controller.req_1(req_1["model"])
+    res_1 = controller.req0_1(req_1["model"])
 
     print(tabulate(res_1["elements"], headers="keys", tablefmt="fancy_grid",maxcolwidths=10 , maxheadercolwidths=10))
 
@@ -270,7 +270,7 @@ if __name__ == "__main__":
                 data = load_data(control,"DIAN/Salida_agregados_renta_juridicos_AG-" + porcentaje + ".csv",orden)
                 
                 
-                print(control)
+                
                 
                 
                 
